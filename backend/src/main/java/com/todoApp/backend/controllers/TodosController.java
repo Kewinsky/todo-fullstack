@@ -21,11 +21,11 @@ public class TodosController {
     @PostMapping(path="/addTodo")
     public @ResponseBody String addNewTodo (
             @RequestParam String title,
-            @RequestParam String details
+            @RequestParam Boolean completed
     ) {
         Todo todo = new Todo();
         todo.setTitle(title);
-        todo.setDetails(details);
+        todo.setCompleted(completed);
         todosRepository.save(todo);
         return "Saved";
     }
@@ -37,23 +37,26 @@ public class TodosController {
     }
 
     @PutMapping("/updateTodoById/{id}")
-    Todo updateTodoById(@RequestBody Todo newTodo, @PathVariable Integer id) {
+    Todo updateTodoById(@RequestParam String title,
+                        @RequestParam Boolean completed,
+                        @PathVariable Integer id) {
 
         return todosRepository.findById(id)
-                .map(employee -> {
-                    employee.setTitle(newTodo.getTitle());
-                    employee.setDetails(newTodo.getDetails());
-                    return todosRepository.save(employee);
+                .map(todo -> {
+                    todo.setTitle(title);
+                    todo.setCompleted(completed);
+                    return todosRepository.save(todo);
                 })
-                .orElseGet(() -> {
-                    newTodo.setId(id);
-                    return todosRepository.save(newTodo);
-                });
+                .orElseThrow(() -> new TodoNotFoundException(id));
     }
 
     @DeleteMapping("/deleteTodoById/{id}")
     void deleteTodoById(@PathVariable Integer id) {
-        todosRepository.deleteById(id);
+        if (todosRepository.existsById(id)){
+            todosRepository.deleteById(id);
+        }else{
+            throw new TodoNotFoundException(id);
+        }
     }
 
 }

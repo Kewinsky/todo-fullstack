@@ -11,7 +11,7 @@ public class Todo {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
     private String title;
-    private String details;
+    private Boolean isCompleted;
 
 
     public Integer getId() {
@@ -30,16 +30,17 @@ public class Todo {
         this.title = title;
     }
 
-    public String getDetails() {
-        return details;
+    public Boolean getCompleted() {
+        return isCompleted;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
     }
+
 
     @Override
     public String toString() {
-        return String.format("Todo %s: %s (%s)", this.getId(), this.getTitle(), this.getDetails());
+        return String.format("Todo %s: %s (%s)", this.getId(), this.getTitle(), this.getCompleted());
     }
 }
