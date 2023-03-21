@@ -3,11 +3,14 @@ import styled from "styled-components";
 export const StyledWrapper = styled.div`
   display: flex;
   position: relative;
+  cursor: pointer;
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary.yellow};
+  }
 `;
 
 export const StyledTodo = styled.li`
   padding: 0.75rem 0;
-  cursor: pointer;
   font-family: "Nunito", sans-serif;
   transition: 500ms;
   &:hover {
@@ -28,9 +31,8 @@ export const StyledButton = styled.button`
   transition: 300ms;
   display: block;
   position: absolute;
-  right: -15px;
+  right: 0px;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.secondary.gray};
     color: ${({ theme }) => theme.colors.primary.yellow};
   }
 `;

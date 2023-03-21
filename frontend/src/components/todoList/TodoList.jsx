@@ -1,8 +1,16 @@
-import { StyledSeparator, StyledTodoList } from "../../pages/styles";
+import {
+  StyledSeparator,
+  StyledTodoList,
+  StyledInfo,
+} from "../../pages/styles";
 import { Todo } from "../todo/Todo";
 export const TodoList = ({ setTodos, todos }) => {
   return (
     <StyledTodoList>
+      <StyledInfo className={`${todos.length === 0 ? "" : "disable"}`}>
+        free_time!
+      </StyledInfo>
+
       {todos.map((todo) => (
         <>
           <Todo

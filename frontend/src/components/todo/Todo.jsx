@@ -21,8 +21,8 @@ export const Todo = ({ text, todo, todos, setTodos }) => {
   return (
     <StyledWrapper>
       <StyledTodo
-        className={`${todo.completed ? "complete" : ""}`}
         onClick={completeHandler}
+        className={`${todo.completed ? "complete" : ""}`}
       >
         {text}
       </StyledTodo>

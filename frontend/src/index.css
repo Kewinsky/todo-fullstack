@@ -129,7 +129,8 @@ table {
 
 body {
   background-color: #202020;
-  margin: 0 20rem;
+  width: 500px;
+  margin: auto;
 }
 
 img,
@@ -150,4 +151,8 @@ input:focus {
 .complete {
   text-decoration: line-through;
   opacity: 0.5;
+}
+
+.disable {
+  display: none;
 }
