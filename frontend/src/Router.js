@@ -11,7 +11,7 @@ function Router() {
         <Route
           path="/"
           element={
-            <MainLayout pageTitle={"Home"}>
+            <MainLayout pageTitle={"Todo List"}>
               <MainPage />
             </MainLayout>
           }

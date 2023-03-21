@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
-export const StyledInputArea = styled.div`
+export const StyledInputArea = styled.form`
   display: flex;
+  position: relative;
 `;
 
 export const StyledInput = styled.input`
   height: 3rem;
   width: 100%;
-  border-radius: 2rem 0 0 2rem;
+  border-radius: 2rem;
   padding: 0 1rem;
   font-family: "Nunito", sans-serif;
   font-size: 1.5rem;
@@ -21,13 +22,16 @@ export const StyledButton = styled.button`
   font-family: "Nunito", sans-serif;
   cursor: pointer;
   height: 3rem;
-  width: 5rem;
+  width: 3.5rem;
   font-size: 1.5rem;
   color: ${({ theme }) => theme.colors.black};
   background-color: ${({ theme }) => theme.colors.primary.yellow};
   border: none;
-  border-radius: 0 2rem 2rem 0;
+  border-radius: 2rem;
   transition: 300ms;
+  display: block;
+  position: absolute;
+  right: 0px;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.secondary.gray};

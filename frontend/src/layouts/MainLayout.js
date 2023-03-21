@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { HorizontalSeparator } from "../components/horizontalSeparator/HorizontalSeparator";
 import { HeaderComponent } from "../components/headerComponent/HeaderComponent";
-import { InputArea } from "../components/inputArea/InputArea";
 
 export const MainLayout = ({ children, pageTitle }) => {
   useEffect(() => {
@@ -12,7 +11,6 @@ export const MainLayout = ({ children, pageTitle }) => {
     <>
       <HeaderComponent />
       <HorizontalSeparator />
-      <InputArea />
       <main>{children}</main>
     </>
   );

@@ -13,12 +13,12 @@ public class TodosController {
     @Autowired
     TodosRepository todosRepository;
 
-    @GetMapping(path="/all")
+    @GetMapping(path="/allTodos")
     public @ResponseBody Iterable<Todo> getAllTodos() {
         return todosRepository.findAll();
     }
 
-    @PostMapping(path="/add")
+    @PostMapping(path="/addTodo")
     public @ResponseBody String addNewTodo (
             @RequestParam String title,
             @RequestParam String details
@@ -30,13 +30,13 @@ public class TodosController {
         return "Saved";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getTodoById/{id}")
     Todo getTodoById(@PathVariable Integer id) {
         return todosRepository.findById(id)
                 .orElseThrow(() -> new TodoNotFoundException(id));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateTodoById/{id}")
     Todo updateTodoById(@RequestBody Todo newTodo, @PathVariable Integer id) {
 
         return todosRepository.findById(id)
@@ -51,7 +51,7 @@ public class TodosController {
                 });
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteTodoById/{id}")
     void deleteTodoById(@PathVariable Integer id) {
         todosRepository.deleteById(id);
     }

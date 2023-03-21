@@ -1,14 +1,19 @@
-import { StyledMainContent, StyledTodo } from "./styles";
+import { InputArea } from "../components/inputArea/InputArea";
+import { useState } from "react";
+import { TodoList } from "../components/todoList/TodoList";
 
 export const MainPage = () => {
+  const [inputText, setInputText] = useState("");
+  const [todos, setTodos] = useState([]);
   return (
-    <StyledMainContent>
-      <StyledTodo>Task 1</StyledTodo>
-      <StyledTodo>Task 2</StyledTodo>
-      <StyledTodo>Task 3</StyledTodo>
-      <StyledTodo>Task 4</StyledTodo>
-      <StyledTodo>Task 5</StyledTodo>
-      <StyledTodo>Task 6</StyledTodo>
-    </StyledMainContent>
+    <>
+      <InputArea
+        todos={todos}
+        setTodos={setTodos}
+        inputText={inputText}
+        setInputText={setInputText}
+      />
+      <TodoList setTodos={setTodos} todos={todos} />
+    </>
   );
 };
