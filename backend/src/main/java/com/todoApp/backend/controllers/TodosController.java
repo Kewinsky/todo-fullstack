@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/todos")
+@CrossOrigin(origins = "*")
 public class TodosController {
 
     @Autowired
@@ -19,15 +20,11 @@ public class TodosController {
     }
 
     @PostMapping(path="/addTodo")
-    public @ResponseBody String addNewTodo (
-            @RequestParam String title,
-            @RequestParam Boolean completed
+    public String addNewTodo (
+            @RequestBody Todo todo
     ) {
-        Todo todo = new Todo();
-        todo.setTitle(title);
-        todo.setCompleted(completed);
         todosRepository.save(todo);
-        return "Saved";
+        return "Todo saved: " + todo;
     }
 
     @GetMapping("/getTodoById/{id}")
@@ -37,26 +34,25 @@ public class TodosController {
     }
 
     @PutMapping("/updateTodoById/{id}")
-    Todo updateTodoById(@RequestParam String title,
-                        @RequestParam Boolean completed,
+    Todo updateTodoById(@RequestBody Todo newTodo,
                         @PathVariable Integer id) {
 
         return todosRepository.findById(id)
                 .map(todo -> {
-                    todo.setTitle(title);
-                    todo.setCompleted(completed);
+                    todo.setTitle(newTodo.getTitle());
+                    todo.setCompleted(newTodo.getCompleted());
                     return todosRepository.save(todo);
                 })
                 .orElseThrow(() -> new TodoNotFoundException(id));
     }
 
     @DeleteMapping("/deleteTodoById/{id}")
-    void deleteTodoById(@PathVariable Integer id) {
-        if (todosRepository.existsById(id)){
-            todosRepository.deleteById(id);
-        }else{
+    String deleteTodoById(@PathVariable Integer id) {
+        if (!todosRepository.existsById(id)){
             throw new TodoNotFoundException(id);
         }
+        todosRepository.deleteById(id);
+        return "Todo " + id + " has been removed.";
     }
 
 }

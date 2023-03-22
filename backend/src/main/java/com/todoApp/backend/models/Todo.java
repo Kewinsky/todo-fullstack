@@ -9,10 +9,12 @@ import javax.persistence.Id;
 public class Todo {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private int id;
     private String title;
     private Boolean isCompleted;
 
+    public Todo() {
+    }
 
     public Integer getId() {
         return id;
